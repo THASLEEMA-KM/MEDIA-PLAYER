@@ -6,7 +6,7 @@ function Histroy() {
     <div className='container my-5'>
       <div className="d-flex justify-content-between">
         <h3>Watch Histroy</h3>
-        <Link to={'/home'}>Back to Home <i class="fa-solid fa-house"></i></Link>
+        <Link to={'/home'}>Back to Home <i class="fs-5 fa-solid fa-house"></i></Link>
       </div>
       <table className="table my-5">
         <thead>

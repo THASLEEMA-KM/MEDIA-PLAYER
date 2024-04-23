@@ -22,11 +22,12 @@ function VideoCard() {
     {/* modal */}
     <Modal size='lg' show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>Caption</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <iframe width="100%" height="315" src="https://www.youtube.com/embed/L0yEMl8PXnw?si=2vD8XQn5YVgxD3ep?autoplay=1" title="caption" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
-        </Modal.Body>
+        <iframe width="100%" height="315"  src="https://www.youtube.com/embed/L0yEMl8PXnw?autoplay=1" title="caption" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+        {/* <iframe width="100%" height="315"  src='https://www.youtube.com/embed/L0yEMl8PXnw?autoplay=1' title="caption" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowFullScreen></iframe> */}
+        </Modal.Body> 
   
       </Modal>
     </>
