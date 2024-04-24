@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { Button, FloatingLabel, Form, Modal } from 'react-bootstrap'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Add() {
   const [videoDetails,setVideoDetails] = useState(
@@ -39,7 +41,8 @@ function Add() {
         console.log("api call");
       }
       else{
-        alert("Please fill the form Completely!!!")
+        
+        toast.warning("Please fill the form Completely!!!")
       }
     }
 
@@ -100,6 +103,8 @@ function Add() {
           <Button onClick={handleUpload} className='btn btn-info' variant="primary">Upload</Button>
         </Modal.Footer>
       </Modal>
+
+      <ToastContainer position='top-center' theme='colored' autoClose={3000}/>
     </>
   )
 }
