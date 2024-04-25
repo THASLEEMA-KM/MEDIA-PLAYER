@@ -149,7 +149,9 @@ REACT - ADVANCED Front End  TECHNOLOGY
                             - using Route component define each component path
                             - Link component used to redirect from one page to another within the page
                         - Route is a HOC(Higher Order Component : a component become argument of another component ) 
-                        - React Toastify : A Library used to alert box
+                        - React Toastify : A Library used to alert 
+                        - Export const : used to export multiple item
+                        - Export default : used to export singel item . Export is must be at end part
                         - API Call in React
                             - Axios Library : to use this install axios library : npm i axios
                             - Create a folder for services
@@ -161,5 +163,5 @@ REACT - ADVANCED Front End  TECHNOLOGY
          2. Create package.json file inside the folder using the commamd :- npm init -y                               
          3. Create db.json file
          4. Create Resources for that file, a resource is a file that to be permenently stored in the json
-         5  to run json file use json server : npm i json-server
+         5  to run json file install json server : npm i json-server
          6. to run json file in local host :npx json-server db.json

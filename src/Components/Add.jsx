@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Button, FloatingLabel, Form, Modal } from 'react-bootstrap'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { addVideoAPI } from '../Services/allAPI';
 
 function Add() {
   const [videoDetails,setVideoDetails] = useState(
@@ -31,7 +32,7 @@ function Add() {
         setInavlidYouTubeURL(true)
       }
     }
-    const handleUpload = ()=>
+    const handleUpload = async ()=>
     {
       console.log("Iinside handleUpload function");
       // const {key1,key2,key3.....} = object-name = destructuring 
@@ -39,6 +40,23 @@ function Add() {
       if(caption && imgURL && youtubeURL)
       {
         console.log("api call");
+        try{
+          const result  = await addVideoAPI(videoDetails)
+          console.log(result);
+          if(result.status>=200 && result.status<300)
+          {
+            console.log(result.data);
+            toast.success(`${result.data.caption} added to your collection!!!`)
+            handleClose()
+          }
+          else
+          {
+            toast.error(result.response.data)
+          }
+        }catch(err)
+        {
+          console.log(err);
+        }
       }
       else{
         
