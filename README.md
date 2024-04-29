@@ -155,6 +155,8 @@ REACT - ADVANCED Front End  TECHNOLOGY
                         - API Call in React
                             - Axios Library : to use this install axios library : npm i axios
                             - Create a folder for services
+                        - State Lifting : Used to share data btw componenets on react. here we create the state in the parent. 
+                            (lifting the state from child to parent)
 
         ---------------------------------------------------------------------------------------------------------------------------------------
                     JSON SERVER

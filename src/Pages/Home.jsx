@@ -1,19 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Add from '../Components/Add'
 import View from '../Components/View'
 import Category from '../Components/Category'
 import { Link } from 'react-router-dom'
 function Home() {
+
+  const [addVideoResponse,setAddVideoResponse] = useState("")
+
   return (
     <>
        <div className="container my-5 d-flex justify-content-between">
-        <Add/>
+        <Add setAddVideoResponse={setAddVideoResponse} />
         <Link to={'/history'}> Watch History <i class="fs-5 fa-solid fa-clock"> </i></Link>
        </div>
        <div className="container-fluid my-5 row">
         <div className="col-lg-6">
           <h3>All Videos</h3>
-          <View/>
+          <View addVideoResponse={addVideoResponse} />
         </div>
         <div className="col-lg-6">
           <Category/>

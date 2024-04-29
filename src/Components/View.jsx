@@ -3,14 +3,14 @@ import { Col, Row } from 'react-bootstrap'
 import VideoCard from './VideoCard'
 import { getAllVideoAPI } from '../Services/allAPI'
 
-function View() {
-
+function View({addVideoResponse}) {
+  const [deleteResponse,setDeleteResponse] = useState("")
   const [allVideos,setAllVideos] = useState([])
   console.log(allVideos);
   useEffect(()=>
 {
   getAllVideos()
-},[])
+},[addVideoResponse,deleteResponse])
 
 const getAllVideos = async () =>
 {
@@ -34,9 +34,17 @@ const getAllVideos = async () =>
   return (
     <>
       <Row>
-        <Col className='mb-4' sm={12} md={6} lg={4}>
-          <VideoCard/>
-        </Col>
+      {
+                allVideos.length>0?
+                allVideos?.map(video=>(
+                  <Col key={video?.id} className='mb-4' sm={12} md={6} lg={4}>
+                  <VideoCard displaydata={video} setDeleteResponse={setDeleteResponse}/>
+                </Col>
+                ))
+                :
+                <div className='fw-bolder text-danger'>Nothing to display</div>
+        
+      }
       </Row>
     </>
   )
