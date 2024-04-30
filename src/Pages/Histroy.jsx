@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { getVideoHistoryAPI } from '../Services/allAPI'
+import { getVideoHistoryAPI, removeHistoryAPI } from '../Services/allAPI'
+
+
+
+
 
 function Histroy() {
 
@@ -21,6 +25,21 @@ const getAllHistory = async()=>
     console.log(err);
   }
 }
+
+
+const handleDeleteVideo = async (videoId) =>{
+  try{
+    await removeHistoryAPI(videoId)
+    getAllHistory()
+    // console.log(result);
+    // setDeleteResponse(result.data)
+
+  }catch(err){
+    console.log(err);
+  }
+
+}
+
   
   return (
     <div className='container my-5'>
@@ -39,13 +58,25 @@ const getAllHistory = async()=>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Avesham Movie Trailer</td>
-            <td><a href="https://www.youtube.com/embed/L0yEMl8PXnw?si=2vD8XQn5YVgxD3ep">https://www.youtube.com/embed/L0yEMl8PXnw?si=2vD8XQn5YVgxD3ep</a></td>
-            <td>22/02/2024 10.45AM</td>
-            <td><i className="fa-solid fa-trash text-danger"></i></td>
+        {
+          videoHistory.length>0?
+          videoHistory?.map((item,index)=>(
+          <tr key={item?.id}>
+            <td>{index+1}</td>
+            <td>{item?.caption}</td>
+            <td><a href="https://www.youtube.com/embed/L0yEMl8PXnw?si=2vD8XQn5YVgxD3ep">{item?.youtubeURL}</a></td>
+            <td>{item?.timeStamp}</td>
+            <td><button onClick={()=>handleDeleteVideo(item?.id)} className='btn fs-5'><i className="fa-solid fa-trash text-danger"></i></button></td>
           </tr>
+          ))
+          :
+          <div className="text-danger text-center fw-bolder">---------------YOUR WATCH HISTORY IS EMPTY!!!---------------
+        
+           </div>
+        
+         
+
+        }
         </tbody>
       </table>
     </div>

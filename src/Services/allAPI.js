@@ -30,3 +30,9 @@ export const getVideoHistoryAPI = async () =>
 {
     return await commonAPI("GET",`${SERVER_URL}/history`,"")
 }
+
+// removehistory called by history Component
+export const removeHistoryAPI = async (videoId) =>
+{
+    return await commonAPI("DELETE",`${SERVER_URL}/history/${videoId}`,{})
+}
