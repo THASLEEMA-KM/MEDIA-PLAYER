@@ -61,7 +61,7 @@ REACT - ADVANCED Front End  TECHNOLOGY
                     - Babel Library : transpile JSX code to simple react function which is understood by browser.
                                       Used to convert the jsx into the langs which are understandable to the browser - html/js 
                 - General Rules for Creating Components
-                    - create a js / jsx file, filename must starts with caoptal letter
+                    - create a js / jsx file, filename must starts with capital letter
                 - Different types of Components : 
                     - Class Based Components : use class to create component it can inherit react component class 
                         - Statefull Component, coz it can create state 
@@ -116,7 +116,7 @@ REACT - ADVANCED Front End  TECHNOLOGY
                     - to use a hook in functional component we must call the hook
                     - Rules for calling hooks in functional component
                         - Import hook from react, in component
-                        - hooks can be called at the top of level of component
+                        - hooks can be called at the top of level of   component
                         - hooks cannot be conditional
                     - Types of hooks
                         - Predefined hooks
@@ -156,7 +156,7 @@ REACT - ADVANCED Front End  TECHNOLOGY
                             - Axios Library : to use this install axios library : npm i axios
                             - Create a folder for services
                         - State Lifting : Used to share data btw componenets on react. here we create the state in the parent. 
-                            (lifting the state from child to parent)
+                            (lifting the state from child to parent) sharing data btw siblings as well as child to parent
 
         ---------------------------------------------------------------------------------------------------------------------------------------
                     JSON SERVER

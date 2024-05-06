@@ -2,13 +2,15 @@ import React, { useEffect, useState } from 'react'
 import { Button, FloatingLabel, Form, Modal } from 'react-bootstrap'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { addCategoryAPI, getCategoryAPI, removeCategoryAPI } from '../Services/allAPI';
+import { addCategoryAPI, getCategoryAPI, getVideoAPI, removeCategoryAPI, removeVideoAPI, updateCategoryAPI } from '../Services/allAPI';
+import VideoCard from './VideoCard';
 
 
-function Category() {
-  // stste for all category
+function Category({setRemoveCategoryVideoResponse}) {
+  // state for all category
   const [allCategories,setAllCategories] = useState([])
   console.log(allCategories);
+  // state for entering name in textbox
   const [categoryName,setCategoryName] = useState("")
 
   // modal function state
@@ -40,8 +42,11 @@ function Category() {
     if(categoryName)
     {
       // api call
+      // toast.success("New category added")
       try {
         await addCategoryAPI({categoryName,allVideos:[]})
+        // to update value of the state to empty used to avoid adding of empty category
+        setCategoryName("")
         handleClose()
         getAllCategory()
       } catch (error) {
@@ -55,7 +60,7 @@ function Category() {
     }
   }
 
-  // category deletinf function
+  // category deleting function
 
   const handleRemoveCategory = async (categoryid)=>
   {
@@ -67,6 +72,47 @@ function Category() {
     }
 
   }
+
+  // function to prevent the event happens before dropping
+  const dragOverCategory =(e)=>
+  {
+    e.preventDefault()
+    console.log("Dragging over category");
+  }
+
+  // function to dropping video
+  const videoDropped = async (e,categoryId)=>
+  {
+    const videoId = e.dataTransfer.getData("videoId")
+    console.log(`Video Id :${videoId} Dropped in Category id : ${categoryId}`);
+      // video getting 
+
+    try {
+      const {data} = await getVideoAPI(videoId)
+      console.log(data);
+      let selectedCategory = allCategories?.find(item=>item.id==categoryId)
+      selectedCategory.allVideos.push(data)
+      console.log(selectedCategory);
+      await updateCategoryAPI(categoryId,selectedCategory)
+      const result = await removeVideoAPI(videoId)
+      setRemoveCategoryVideoResponse(result)
+      getAllCategory()
+
+    } catch (error) {
+      console.log(error);
+      
+    }
+  }
+// function for removing video from category to all videos(view compo)
+// here we pass the video details as args
+const videoDragStarted = (e,videoDetails,categoryId)=>
+{
+  console.log(categoryId,videoDetails);
+  console.log("video dragging strated from categroy");
+  let dataShare = {categoryId,videoDetails}
+  // the datashre is created as onj, so to convert used json.stringify()
+  e.dataTransfer.setData("dataShare",JSON.stringify(dataShare))
+}
 
   return (
     <>
@@ -80,11 +126,22 @@ function Category() {
         {
           allCategories.length>0?
           allCategories?.map(item=>(
-              <div key={item?.id} className="border rounded p-3 mb-2">
+              <div droppable={true} onDragOver={e=>dragOverCategory(e)} onDrop={e=>videoDropped(e,item?.id)} key={item?.id} className="border rounded p-3 mb-2">
                 <div className="d-flex justify-content-between">
                   <h5>{item?.categoryName}</h5>
                   <button onClick={()=>handleRemoveCategory(item?.id)} className="btn"><i className="fa-solid fa-trash text-danger"></i></button>
                 </div>
+                <div className="row mt-2">
+                  {
+                    item.allVideos?.length>0 &&
+                    item.allVideos?.map(video=>(
+                      <div draggable={true} onDragStart={e=>videoDragStarted(e,video,item.id)} key={video?.id} className="pt-2 col-lg-6">
+                        <VideoCard displaydata={video} insideCategory={true} />
+                      </div>
+                    ))
+                  }
+                </div>
+
               </div>
           ))
           :

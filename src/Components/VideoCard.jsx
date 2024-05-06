@@ -3,13 +3,14 @@ import {  Card, Modal } from 'react-bootstrap'
 import { removeVideoAPI, saveHistoryAPI } from '../Services/allAPI';
 
 
-function VideoCard({displaydata,setDeleteResponse}) {
+function VideoCard({displaydata,setDeleteResponse,insideCategory}) {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = async () => {
     setShow(true);
     const {caption,youtubeURL} = displaydata
+    // to get the time for watch history
     const systemTime = new Date()
     const formattedDate = systemTime.toLocaleString('en-US',{timeZoneName:'short'});
     console.log(formattedDate)
@@ -31,18 +32,24 @@ function VideoCard({displaydata,setDeleteResponse}) {
       console.log(err);
     }
   }
-
+const dragStarted = (e,videoId) =>
+{
+  console.log(`Dragging started with video Id : ${videoId}`);
+  e.dataTransfer.setData("videoId",videoId)
+}
 
   
   return (
     <>
-    <Card>
+    <Card draggable={true} onDragStart={e=>dragStarted(e,displaydata?.id)}>
       <Card.Img onClick={handleShow}  height={'200px'} variant="top" src={displaydata?.imgURL} />
       <Card.Body>
         <Card.Title className='d-flex justify-content-between'> 
         <p className='pt-2'>{displaydata?.caption}</p>
-        <button onClick={()=>handleRemoveVideo(displaydata?.id)} className='btn'><i className="fa-solid fa-trash text-danger fs-5"></i></button>
-        </Card.Title>
+{     !insideCategory &&  
+ <button  onClick={()=>handleRemoveVideo(displaydata?.id)} className='btn'><i className="fa-solid fa-trash text-danger fs-5"></i></button>
+}        
+      </Card.Title>
 
       </Card.Body>
     </Card>

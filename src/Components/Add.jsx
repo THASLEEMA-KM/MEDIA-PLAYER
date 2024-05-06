@@ -47,12 +47,21 @@ function Add({setAddVideoResponse}) {
           {
             console.log(result.data);
             setAddVideoResponse(result.data)
+            // alert("done")
+            // updating value of state to empty to avoid null data enetring
+            setVideoDetails({
+              caption:'',
+              imgURL:'',
+              youtubeURL:''
+          })
             toast.success(`${result.data.caption} added to your collection!!!`)
             handleClose()
           }
           else
           {
-            toast.error(result.response.data)
+            console.log(result.response.data);
+            // alert("error occured")
+            toast.error("something went wrong")
           }
         }catch(err)
         {
@@ -60,7 +69,7 @@ function Add({setAddVideoResponse}) {
         }
       }
       else{
-        
+        // alert("ojshbs")
         toast.warning("Please fill the form Completely!!!")
       }
     }

@@ -7,19 +7,21 @@ function Home() {
 
   const [addVideoResponse,setAddVideoResponse] = useState("")
 
+  // state for removing a video from category-using state lifting
+  const [removeCategoryVideoResponse,setRemoveCategoryVideoResponse] = useState("")
   return (
     <>
        <div className="container my-5 d-flex justify-content-between">
         <Add setAddVideoResponse={setAddVideoResponse} />
-        <Link to={'/history'}> Watch History <i class="fs-5 fa-solid fa-clock"> </i></Link>
+        <Link to={'/history'}> Watch History <i className="fs-5 fa-solid fa-clock"> </i></Link>
        </div>
        <div className="container-fluid my-5 row">
         <div className="col-lg-6">
           <h3>All Videos</h3>
-          <View addVideoResponse={addVideoResponse} />
+          <View addVideoResponse={addVideoResponse} removeCategoryVideoResponse={removeCategoryVideoResponse} />
         </div>
         <div className="col-lg-6">
-          <Category/>
+          <Category setRemoveCategoryVideoResponse={setRemoveCategoryVideoResponse}/>
         </div>
        </div>
     </>
