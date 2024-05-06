@@ -3,7 +3,7 @@ import { Col, Row } from 'react-bootstrap'
 import VideoCard from './VideoCard'
 import { addVideoAPI, getAllVideoAPI, getSingleCategoryAPI, updateCategoryAPI } from '../Services/allAPI'
 
-function View({addVideoResponse,removeCategoryVideoResponse}) {
+function View({addVideoResponse,removeCategoryVideoResponse,setDeleteVideoCategoryResponse}) {
   const [deleteResponse,setDeleteResponse] = useState("")
   // state for get all videos
   const [allVideos,setAllVideos] = useState([])
@@ -50,7 +50,7 @@ const handleCategoryVideo = async (e)=>
     console.log(updatedCategoryVideoList);
     const {id,categoryName} = data
     const categoryResult = await updateCategoryAPI(categoryId,{id,categoryName,allVideos:updatedCategoryVideoList})
-
+    setDeleteVideoCategoryResponse(categoryResult.data)
     // calling the api addvideoapi to add the dragged video from category to view
     await addVideoAPI(videoDetails)
     //  call the function to get all videos in the component view

@@ -6,7 +6,7 @@ import { addCategoryAPI, getCategoryAPI, getVideoAPI, removeCategoryAPI, removeV
 import VideoCard from './VideoCard';
 
 
-function Category({setRemoveCategoryVideoResponse}) {
+function Category({setRemoveCategoryVideoResponse,deleteVideoCategoryResponse}) {
   // state for all category
   const [allCategories,setAllCategories] = useState([])
   console.log(allCategories);
@@ -23,13 +23,14 @@ function Category({setRemoveCategoryVideoResponse}) {
   useEffect(()=>
     {
         getAllCategory()
-    },[])
+    },[deleteVideoCategoryResponse])
 
   // category getting function
   const getAllCategory = async ()=>
   {
     try {
       const result = await getCategoryAPI()
+      console.log(result.data);
       setAllCategories(result.data)
     } catch (error) {
       console.log(error);
@@ -41,8 +42,16 @@ function Category({setRemoveCategoryVideoResponse}) {
   {
     if(categoryName)
     {
+            // if(categoryName)
+            //   {
+                    // toast.warning("")
+            //   }
+            // else
+            // {
+
+            // }
       // api call
-      // toast.success("New category added")
+      toast.success("New category added")
       try {
         await addCategoryAPI({categoryName,allVideos:[]})
         // to update value of the state to empty used to avoid adding of empty category
@@ -52,6 +61,7 @@ function Category({setRemoveCategoryVideoResponse}) {
       } catch (error) {
         console.log(error);
       }
+
       
     }
     else
@@ -67,6 +77,7 @@ function Category({setRemoveCategoryVideoResponse}) {
     try {
       await removeCategoryAPI(categoryid)
       getAllCategory()
+
     } catch (error) {
       console.log(error);
     }

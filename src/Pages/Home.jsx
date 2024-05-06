@@ -9,6 +9,8 @@ function Home() {
 
   // state for removing a video from category-using state lifting
   const [removeCategoryVideoResponse,setRemoveCategoryVideoResponse] = useState("")
+  // state for updating the deleted response
+  const [deleteVideoCategoryResponse,setDeleteVideoCategoryResponse] =useState("")
   return (
     <>
        <div className="container my-5 d-flex justify-content-between">
@@ -18,10 +20,10 @@ function Home() {
        <div className="container-fluid my-5 row">
         <div className="col-lg-6">
           <h3>All Videos</h3>
-          <View addVideoResponse={addVideoResponse} removeCategoryVideoResponse={removeCategoryVideoResponse} />
+          <View setDeleteVideoCategoryResponse={setDeleteVideoCategoryResponse} addVideoResponse={addVideoResponse} removeCategoryVideoResponse={removeCategoryVideoResponse} />
         </div>
         <div className="col-lg-6">
-          <Category setRemoveCategoryVideoResponse={setRemoveCategoryVideoResponse}/>
+          <Category deleteVideoCategoryResponse={deleteVideoCategoryResponse} setRemoveCategoryVideoResponse={setRemoveCategoryVideoResponse}/>
         </div>
        </div>
     </>
