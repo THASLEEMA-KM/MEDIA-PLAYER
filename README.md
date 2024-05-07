@@ -166,11 +166,21 @@ REACT - ADVANCED Front End  TECHNOLOGY
          3. Create db.json file
          4. Create Resources for that file, a resource is a file that to be permenently stored in the json
          5  to run json file install json server : npm i json-server / npm i json-server@0.17.4 
-         6. to run json file in local host :npx json-server db.json
+         6. to run json file in local host :npx json-server db.json / node index.js
         ---------------------------------------------------------------------------------------------------------------------------------------
                     JSON SERVER DEPLOYING Using NODE JS
         ---------------------------------------------------------------------------------------
         1. Create index.js file server folder
         2. Update script in package.json to "start":"node index.js"
         3. Create .gitignore file and add 'node_modules' in that
+        4. Define json-server to run json file in index.js
+            - import json-server
+            - create a server  to run json file using create() method of jsonSerever 
+            - create middleware usdby json server
+            - set up route json file in server using router() method
+            - set up port for server application 
+                process.env.PORT = to get available port number in browser
+            - use middleare route in server app
+            - listen the app in given port to resolve client request
+        5. to run the server use 'node index.js'
         

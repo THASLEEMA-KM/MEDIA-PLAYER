@@ -42,9 +42,11 @@ function Category({setRemoveCategoryVideoResponse,deleteVideoCategoryResponse}) 
   {
     if(categoryName)
     {
-            // if(categoryName)
+          const result = await getCategoryAPI()
+          console.log(result.data);
+            // if(categoryName==result.data)
             //   {
-                    // toast.warning("")
+                    // toast.warning("already exist")
             //   }
             // else
             // {
